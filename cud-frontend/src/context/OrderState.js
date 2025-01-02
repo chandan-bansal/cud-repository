@@ -25,7 +25,7 @@ const OrderState = (props) => {
     });
   };
 
-  const resetValues = () => {
+  const resetFodder = () => {
     setOrderMap((prevMap) => {
       let newMap = new Map(ingredientMap);
       return newMap;
@@ -42,11 +42,11 @@ const OrderState = (props) => {
         totalObject.weight
       );
     }
-    resetValues();
+    resetFodder();
   };
   return (
     <OrderContext.Provider
-      value={{ orderMap, updateOrder, totalObject, resetValues, addToCart }}
+      value={{ orderMap, updateOrder, totalObject, resetFodder, addToCart }}
     >
       {props.children}
     </OrderContext.Provider>

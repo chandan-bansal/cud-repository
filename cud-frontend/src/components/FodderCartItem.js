@@ -1,19 +1,27 @@
 import React, { useContext } from "react";
 import cartContext from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 const FodderCartItem = (props) => {
     const cartCtx = useContext(cartContext)
-    const {deleteFodderFromCart} = cartCtx;
-  const { id, orderDetails } = props;
+    const {deleteFodderFromCart, allPrevOrders} = cartCtx;
+  const { id, orderDetails, order } = props;
+  console.log("Order_id", order.order_id)
+  console.log("Order", order)
+  const navigate = useNavigate();
     const editFodder = () =>{
 
     }
 
+    const handleClick = () =>{
+      console.log(`/orders/${order.customer_id}/${order.order_id}/fodder/${id}/details`)
+      navigate(`/orders/${order.customer_id}/${order.order_id}/fodder/${id}/details`)
+    }
     const deleteFodder = () =>{
         deleteFodderFromCart(id);
     }
   return (
-    <div className="grid grid-cols-4 gap-4 items-center justify-center p-2 border-b border-gray-200">
+    <div className="grid grid-cols-4 gap-4 items-center justify-center p-2 border-b border-gray-200 cursor-pointer" onClick={handleClick}>
       <p className="text-center text-gray-600">{`Fodder: ${id}`}</p>
       <p className="text-center text-gray-600">{orderDetails.totalWeight} kg</p>
       <p className="text-center text-gray-600">⟨₹⟩{orderDetails.totalSum}</p>

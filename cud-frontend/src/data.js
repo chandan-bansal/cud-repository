@@ -420,3 +420,87 @@ for (let ing in fodderIngredients) {
     totalPrice: 0,
   });
 }
+
+
+export const customerData = {
+  3333333330:{
+    id: 4444444440,
+    name: "Chandan Bansal",
+    village:"Nihal Singh Wala",
+    mobile:8968753221,
+    address: "Barnala Road",
+    fatherName: "Chiman Lal"
+  },
+  3333333331:{
+    id: 4444444441,
+    name: "Nikhil Singla",
+    village: "Nihal Singh Wala",
+    mobile: 7888658561,
+    address:"Madhe Road",
+    fatherName: "Sanjeev Singla"
+  },
+  3333333332:{
+    id:4444444442,
+    name:"Abhishek Goyal",
+    village:"Gajiana",
+    mobile: 1234567890,
+    address:"Near Gajiana Bus Stand",
+    fatherName: "Vinod Goyal"
+  },
+  3333333333:{
+    id:4444444443,
+    name:"Chirag Bansal",
+    village:"Gajiana",
+    mobile:4321567890,
+    address:"Near Sarkari School",
+    fatherName: "Vinod Bansal"
+  },
+  3333333334:{
+    id:4444444444,
+    name:"Abhinav Sharma",
+    village:"Rouke",
+    mobile:9845678320,
+    address:"Near Aara",
+    fatherName: "Raju Sharma"
+  },
+  3333333335:{
+    id:4444444445,
+    name:"Chandan Singla",
+    village:"Rouke",
+    mobile:7896543210,
+    address:"Near Bajakhana Road",
+    fatherName: "Chiman Singla"
+  },
+  3333333336:{
+    id:4444444446,
+    name:"Rishav Garg",
+    village:"Madhe",
+    mobile:8976543210,
+    address:"Barnala Road",
+    fatherName: "Rajesh Garg"
+  },
+  3333333337:{
+    id:4444444447,
+    name:"Raghav Sharma",
+    village:"Madhe",
+    mobile:678904321,
+    address:"Dharamshala",
+    fatherName: "Rohit Sharma"
+  },
+  3333333338:{
+    id:4444444448,
+    name:"Tushar",
+    village:"Badhni",
+    mobile:4567890123,
+    address:"Near gaushala",
+    fatherName: "Sonu"
+  },
+  3333333339:{
+    id:4444444449,
+    name:"Avinash",
+    village:"Badhni",
+    mobile:7890654321,
+    address:"Near Canal",
+    fatherName: "Mukesh"
+  },
+}

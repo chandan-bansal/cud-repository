@@ -9,30 +9,41 @@ import OrderState from "./context/OrderState";
 import CartState from "./context/CartState";
 import Cart from "./screens/Cart";
 import ProductState from "./context/ProductState";
+import NewCustomer from "./screens/NewCustomer";
+import CustomerState from "./context/CustomerState";
+import CustomerOrderScreen from "./screens/CustomerOrderScreen";
+import OrderDetailScreen from "./screens/OrderDetailScreen";
 
 function App() {
   return (
     <div>
+      <BrowserRouter>
+      <CustomerState>
       <CartState>
         <OrderState>
           <ProductState>
-          <BrowserRouter>
+          
             <Navbar />
             <Routes>
               <Route exact path="/" element={<ProductScreen />} />
               <Route exact path="/orderHistory" element={<OrderHistory />} />
               <Route exact path="/userHistory" element={<UserHistory />} />
               <Route exact path="/cart" element={<Cart/>} />
+              <Route exact path="/newCustomer" element={<NewCustomer/>} />
               <Route
                 exact
                 path="/customizedFodder"
                 element={<CustomizedFodder />}
               />
+              <Route path="/orders/:id" element={<OrderHistory/>}/>
+              <Route path="/orders/:customer_id/:order_id" element={<OrderDetailScreen/>}/>
+              <Route path="/orders/:customer_id/:order_id/fodder/:fodder_id/details" element={<CustomerOrderScreen/>}/>
             </Routes>
-          </BrowserRouter>
           </ProductState>
         </OrderState>
       </CartState>
+      </CustomerState>
+      </BrowserRouter>
     </div>
   );
 }
