@@ -3,7 +3,6 @@ import FodderCartItem from "./FodderCartItem";
 
 const FodderCart = (props) => {
   const { order, items } = props;
-  console.log("Order_id in fodder cart", order.order_id)
   const dataItems = items?items:{};
   return (
     <div className="bg-white p-4 rounded-md shadow-md">

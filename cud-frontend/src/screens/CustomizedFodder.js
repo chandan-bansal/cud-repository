@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
 import FodderIngredient from "../components/FodderIngredient";
 import orderContext from "../context/OrderContext";
+import { useLocation } from "react-router-dom";
 
 const CustomizedFodder = () => {
   const orderCtx = useContext(orderContext);
-  const { totalObject, resetValues, orderMap, addToCart } = orderCtx;
+  const { totalObject, resetValues, orderMap, addToCart,addEditedFodderToCart } = orderCtx;
+  const location = useLocation();
+  const pathName = location.pathname;
+
   return (
     <div className="p-8 bg-gray-50 rounded-xl shadow-xl max-w-5xl mx-auto mt-8">
       {/* Header */}
@@ -33,12 +37,19 @@ const CustomizedFodder = () => {
           <span className="text-green-600">{totalObject.weight}</span>
         </p>
         <p className="text-xl font-semibold text-gray-800">
-          Total Sum: <span className="text-green-600">{totalObject.sum}</span>
+          Total Sum: <span className="text-green-600">⟨₹⟩{totalObject.sum}</span>
         </p>
+
         <button className="text-xl font-bold text-white bg-green-600 p-2 rounded-lg"
-        onClick={addToCart}>
+        //  onClick={addIngredientToFodder}
+        >
+          Add Ingredient
+        </button>
+        <button className="text-xl font-bold text-white bg-green-600 p-2 rounded-lg"
+        onClick={pathName.includes("edit")?addEditedFodderToCart:addToCart}>
           Add to Cart
         </button>
+
         <button
           className="text-xl font-bold text-white bg-black p-2 rounded-lg"
           onClick={resetValues}

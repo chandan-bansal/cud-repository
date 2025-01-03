@@ -7,16 +7,14 @@ const OrderHistory = () => {
   const cartCtx = useContext(cartContext);
   const { allPrevOrders, customerOrders,getAllOrdersOfCustomer } = cartCtx;
   const {id} = useParams() 
-  useEffect(()=>{
-    getAllOrdersOfCustomer(id);
-  },[])
+  // useEffect(()=>{
+  //   getAllOrdersOfCustomer(id);
+  // },[])
   const location = useLocation();
   let data = customerOrders
   if(location.pathname === "/orderHistory"){
     data = allPrevOrders
   }
-
-  console.log("data", data)
   return (
     <div className="p-6 m-6 bg-gray-50 rounded-lg shadow-lg max-w-4xl mx-auto">
       <h2 className="text-3xl font-extrabold mb-6 text-gray-900 border-b pb-2">

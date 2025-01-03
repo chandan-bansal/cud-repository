@@ -53,7 +53,7 @@ const FodderIngredient = (props) => {
         />
       </div>
       <div className="items-center flex justify-center">
-        <p className="font-medium text-green-600">{ingredient.totalPrice}</p>
+        <p className="font-medium text-green-600">⟨₹⟩{ingredient.totalPrice}</p>
       </div>
     </div>
   );

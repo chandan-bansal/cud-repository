@@ -35,8 +35,19 @@ function App() {
                 path="/customizedFodder"
                 element={<CustomizedFodder />}
               />
+              <Route
+                exact
+                path="/editFodder"
+                element={<CustomizedFodder />}
+              />
+              <Route
+                exact
+                path="/reuseFodder"
+                element={<CustomizedFodder />}
+              />
               <Route path="/orders/:id" element={<OrderHistory/>}/>
               <Route path="/orders/:customer_id/:order_id" element={<OrderDetailScreen/>}/>
+              <Route path="/cart/fodder/:fodder_id/details" element={<CustomerOrderScreen/>}/>
               <Route path="/orders/:customer_id/:order_id/fodder/:fodder_id/details" element={<CustomerOrderScreen/>}/>
             </Routes>
           </ProductState>

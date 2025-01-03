@@ -17,10 +17,8 @@ const OrderDetailScreen = () => {
       break;
     }
   }
-  console.log("Order in orderdetailscreen", order)
   const handleClick = () => {
     // saveOrderInCart();
-    console.log("Handle Click");
   };
 
   return (
