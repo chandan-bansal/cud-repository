@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CustomerContext from "./CustomerContext";
 const CustomerState = (props) => {
-  const host = "http://localhost:5000"
+  const host = "https://cud-repository-backend.onrender.com"
   const [allCustomers, setAllCustomers] = useState([]);
   const [loggedInCustomer, setLoggedInCustomer] = useState(() => {
     try {
