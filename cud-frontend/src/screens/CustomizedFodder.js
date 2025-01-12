@@ -1,14 +1,41 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import FodderIngredient from "../components/FodderIngredient";
 import orderContext from "../context/OrderContext";
 import { useLocation } from "react-router-dom";
+import Modal from "../components/Modal";
 
 const CustomizedFodder = () => {
   const orderCtx = useContext(orderContext);
+  const {setOrderMap} = orderCtx;
+  const [isModal, setIsModal] = useState(false);
   const { totalObject, resetValues, orderMap, addToCart,addEditedFodderToCart } = orderCtx;
   const location = useLocation();
   const pathName = location.pathname;
 
+  const showModal = () =>{
+    setIsModal(true);
+  }
+
+  const addNewIngredient = (ingredientObj) =>{
+    if(ingredientObj.ingredient === ""){
+      alert("Enter a valid name");
+      return;
+    }
+
+    else{
+      setOrderMap((prevMap)=>{
+        const id = Date.now();
+        const newMap = prevMap
+        newMap.set(id, ingredientObj);
+        return newMap;
+      })
+    }
+    hideModal();
+
+  }
+  const hideModal = () =>{
+    setIsModal(false);
+  }
   return (
     <div className="p-8 bg-gray-50 rounded-xl shadow-xl max-w-5xl mx-auto mt-8">
       {/* Header */}
@@ -29,6 +56,7 @@ const CustomizedFodder = () => {
           <FodderIngredient key={key} id={key} ingredient={value} />
         ))}
       </div>
+      {isModal && <Modal onClose={hideModal} handleSubmit={addNewIngredient}/>}
 
       {/* Total Sum */}
       <div className=" flex mt-6 p-4 bg-gray-100 rounded-lg shadow-md text-right justify-between">
@@ -41,7 +69,7 @@ const CustomizedFodder = () => {
         </p>
 
         <button className="text-xl font-bold text-white bg-green-600 p-2 rounded-lg"
-        //  onClick={addIngredientToFodder}
+          onClick={showModal}
         >
           Add Ingredient
         </button>
