@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CustomerContext from "./CustomerContext";
 const CustomerState = (props) => {
+  const host = "http://localhost:5000"
   const [allCustomers, setAllCustomers] = useState([]);
   const [loggedInCustomer, setLoggedInCustomer] = useState(() => {
     try {
@@ -20,7 +21,7 @@ const CustomerState = (props) => {
   }, []);
   const addNewCustomer = async (customer) => {
     try {
-      const response = await fetch("http://localhost:5000/customer", {
+      const response = await fetch(`${host}/customer`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(customer),
@@ -39,7 +40,7 @@ const CustomerState = (props) => {
   const fetchAllCustomers = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/customer/allCustomers",
+        `${host}/customer/allCustomers`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },

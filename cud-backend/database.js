@@ -1,26 +1,36 @@
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./orders.db');
+// 
 
-db.serialize(() => {
-    db.run(`
-        CREATE TABLE IF NOT EXISTS customer (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            fatherName Text NOT NULL,
-            village TEXT NOT NULL,
-            mobile TEXT NOT NULL,
-            address TEXT
-        );
-    `);
+const mongoose = require('mongoose');
 
-    db.run(`
-        CREATE TABLE IF NOT EXISTS cudOrder (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            customer_id TEXT NOT NULL,
-            order_details TEXT NOT NULL,
-            FOREIGN KEY (customer_id) REFERENCES customer(id)
-        );
-    `);
+// MongoDB connection
+mongoose.connect(`${process.env.MONGODB_URI}/ordersDB`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 });
 
-module.exports = db;
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+    console.log('Connected to MongoDB');
+});
+
+// Define schemas
+const customerSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    fatherName: { type: String, required: true },
+    village: { type: String, required: true },
+    mobile: { type: String, required: true },
+    address: { type: String },
+});
+
+const orderSchema = new mongoose.Schema({
+    customerId: { type: mongoose.Schema.Types.ObjectId, ref: 'Customer', required: true },
+    orderDetails: { type: Object, required: true }, // Stores order details as a JSON object
+});
+
+// Create models
+const Customer = mongoose.model('Customer', customerSchema);
+const Order = mongoose.model('Order', orderSchema);
+
+module.exports = { Customer, Order };

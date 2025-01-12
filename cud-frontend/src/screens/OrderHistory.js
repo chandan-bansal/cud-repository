@@ -16,7 +16,7 @@ const OrderHistory = () => {
     data = allPrevOrders
   }
   return (
-    <div className="p-6 m-6 bg-gray-50 rounded-lg shadow-lg max-w-4xl mx-auto">
+    <div className="p-6 m-6 bg-gray-50 rounded-lg shadow-lg max-w-6xl mx-auto">
       <h2 className="text-3xl font-extrabold mb-6 text-gray-900 border-b pb-2">
         Order History
       </h2>

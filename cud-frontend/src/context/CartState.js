@@ -4,6 +4,7 @@ import customerContext from "./CustomerContext";
 import { useNavigate } from "react-router-dom";
 
 const CartState = (props) => {
+  const host = "http://localhost:5000"
   const customerCtx = useContext(customerContext);
   const { loggedInCustomer } = customerCtx;
   const [clearOrders, setClearOrders] = useState(true);
@@ -111,11 +112,12 @@ const CartState = (props) => {
         ...cartObject,
         ["createdOn"] : new Date()
       }
-      const response = await fetch("http://localhost:5000/newOrder", {
+      console.log(loggedInCustomer);
+      const response = await fetch(`${host}/newOrder`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          customerId: loggedInCustomer.id, // Assign key name to loggedInUser.id
+          customerId: loggedInCustomer._id, // Assign key name to loggedInUser.id
           orderDetails: modifiedCartObject, // Assign key name to cartObject
         }),
       });
@@ -142,7 +144,7 @@ const CartState = (props) => {
   //Get All Previous Orders
   const getAllPreviousOrders = async () => {
     try {
-      const response = await fetch("http://localhost:5000/orders", {
+      const response = await fetch(`${host}/orders`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
@@ -156,7 +158,7 @@ const CartState = (props) => {
 
   const getAllOrdersOfCustomer = async(customer_id) =>{
     try {
-      const response = await fetch(`http://localhost:5000/orders/${customer_id}`, {
+      const response = await fetch(`${host}/orders/${customer_id}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });

@@ -5,7 +5,7 @@ const CustomerItem = ({ customer }) => {
   const cartCtx = useContext(cartContext);
   const {getAllOrdersOfCustomer} = cartCtx;
   const handleClick = () =>{
-    getAllOrdersOfCustomer(customer.id);
+    getAllOrdersOfCustomer(customer._id);
   }
   return (
     <div className="grid grid-cols-4 items-center py-2 px-4 hover:bg-gray-200 transition-colors cursor-pointer" onClick={handleClick}>
