@@ -13,11 +13,13 @@ import NewCustomer from "./screens/NewCustomer";
 import CustomerState from "./context/CustomerState";
 import CustomerOrderScreen from "./screens/CustomerOrderScreen";
 import OrderDetailScreen from "./screens/OrderDetailScreen";
+import AllProductsState from "./context/AllProductsState";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
+      <AllProductsState>
       <CustomerState>
       <CartState>
         <OrderState>
@@ -54,6 +56,7 @@ function App() {
         </OrderState>
       </CartState>
       </CustomerState>
+      </AllProductsState>
       </BrowserRouter>
     </div>
   );

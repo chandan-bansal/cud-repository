@@ -1,15 +1,16 @@
 import React, { useContext } from "react";
 import cartContext from "../context/CartContext";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import FodderIngredient from "../components/FodderIngredient";
 import CustomerOrderScreenItem from "../components/CustomerOrderScreenItem";
 import orderContext from "../context/OrderContext";
-import { ingredientMap } from "../data";
+import productContext from "../context/ProductContext";
 const CustomerOrderScreen = () => {
   const cartCtx = useContext(cartContext);
   const { getOrder, cartObject } = cartCtx;
   const orderCtx = useContext(orderContext);
   const {setOrderMap, setEditFodderId} = orderCtx;
+  const productCtx = useContext(productContext);
+  const {updateAddedToFodderForProductList} = productCtx;
   const navigate = useNavigate();
   const location = useLocation();
   const pathName = location.pathname;
@@ -17,7 +18,7 @@ const CustomerOrderScreen = () => {
   if(pathName.includes("/cart")){
     isCart = true;
   }
-  const { customer_id, order_id, fodder_id } = useParams();
+  const { order_id, fodder_id } = useParams();
   const targetOrder = getOrder(order_id);
   const targetFodder = targetOrder?.[0]?.order_details?.fodderInCart;
   let fodderComp = targetFodder?.[fodder_id]?.["order"];
@@ -28,43 +29,22 @@ const CustomerOrderScreen = () => {
   }
   fodderComp = fodderComp ? fodderComp : {};
   const filteredEntries = Object.entries(fodderComp)
-    .filter(([key, value]) => value.quantity !== 0)
+    .filter(([key, value]) => value.quantityInWeight !== 0 || value.quantityInCount !== 0)
     .map(([key, value]) => ({ [key]: value }));
 
   const filteredData = Object.assign({}, ...filteredEntries);
-  const convertObjectToMap = (fodderObj) =>{
-    let mp = new Map();
-    for(const [key, values] of Object.entries(fodderObj)){
-      mp.set(key, values);
-    }
-    return mp;
-  }
 
-  const convertObjectToMapWithUpdatedPrice = (fodderObj) =>{
-    let mp = new Map();
-    for(const [key, values] of Object.entries(fodderObj)){
-      if(ingredientMap.has(key)){
-        values.price = ingredientMap.get(key).price;
-        values.totalPrice = values.price * values.quantity;
-        console.log("has key")
-        mp.set(key, values);
-      }
-      else{
-        mp.set(key,values);
-      }
-      
-    }
-    return mp;
-  }
   const editFodder = () =>{
-    let fodderMap = convertObjectToMap(fodderComp)
+    let fodderMap = {...fodderComp}
+    updateAddedToFodderForProductList(fodderMap);
     setEditFodderId(fodder_id)
     setOrderMap(fodderMap);
     navigate("/editFodder")
   }
 
   const useThisFormula = () =>{
-    let fodderMap = convertObjectToMapWithUpdatedPrice(fodderComp)
+    let fodderMap = {...fodderComp}
+    updateAddedToFodderForProductList(fodderMap);
     setOrderMap(fodderMap);
     navigate("/customizedFodder")
   }
@@ -77,7 +57,7 @@ const CustomerOrderScreen = () => {
         </p>
         <p className="text-center font-semibold text-gray-700 text-lg">Price</p>
         <p className="text-center font-semibold text-gray-700 text-lg">
-          Quantity (in Kgs)
+          Quantity
         </p>
         <p className="text-center font-semibold text-gray-700 text-lg">Total</p>
       </div>

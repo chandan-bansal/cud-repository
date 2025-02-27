@@ -29,8 +29,24 @@ const orderSchema = new mongoose.Schema({
     orderDetails: { type: Object, required: true }, // Stores order details as a JSON object
 });
 
+const productSchema = new mongoose.Schema({
+    name: { type: String, required:true},
+    imageUrl:{type: String, required: true},
+    pricePerKg: {type: Number, required: true},
+    pricePerBag: {type: Number, required: true},
+    weightOfBag: {type: Number, required: true},
+    category:{type: String, required: true},
+    description:{type:String},
+    isFodderIngredient: {type:Boolean, required:true},
+    productCanBeAddedToFodder: {type:Boolean, required:true},
+    isWhole: {type:Boolean, required:true},
+    totalAvailableCount: {type: Number,required: true},
+    totalAvailableWeight: {type:Number, required: true}
+});
+
 // Create models
 const Customer = mongoose.model('Customer', customerSchema);
 const Order = mongoose.model('Order', orderSchema);
+const Product = mongoose.model("Product", productSchema);
 
-module.exports = { Customer, Order };
+module.exports = { Customer, Order, Product };

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import CustomerContext from "./CustomerContext";
+const host = "http://localhost:5000"
+
 const CustomerState = (props) => {
-  const host = "http://localhost:5000"
   const [allCustomers, setAllCustomers] = useState([]);
   const [loggedInCustomer, setLoggedInCustomer] = useState(() => {
     try {

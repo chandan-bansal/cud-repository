@@ -2,18 +2,18 @@ import React, { useState } from "react";
 
 const Modal = (props) => {
   const { styles, onClose, handleSubmit } = props;
-    const [newIngredient, setNewIngredient] = useState({ingredient:"", price:0, quantity:0, totalPrice:0});
+    const [newIngredient, setNewIngredient] = useState({name:"", pricePerKg:0, quantityInWeight:0, totalPrice:0});
     
     const handleChange = (e) =>{
         let {id, value} = e.target;
         setNewIngredient((prevObj) =>{
-            let totalPrice = prevObj.price * prevObj.quantity;
+            let totalPrice = prevObj.pricePerKg * prevObj.quantityInWeight;
 
-            if(id === "price" || id === "quantity"){
+            if(id === "pricePerKg" || id === "quantityInWeight"){
                 value = parseFloat(value);
-                totalPrice = id==="price"?value*prevObj.quantity : prevObj.price*value;
+                totalPrice = id==="pricePerKg"?value*prevObj.quantityInWeight : prevObj.pricePerKg*value;
             }
-            const updatedObj = {...prevObj, [id]:value, ["totalPrice"] : totalPrice};
+            const updatedObj = {...prevObj, [id]:value, "totalPrice" : totalPrice};
             return updatedObj; 
         })
     }
@@ -34,24 +34,24 @@ const Modal = (props) => {
           </label>
           <input
             type="text"
-            id="ingredient"
-            name="ingredient"
+            id="name"
+            name="name"
             autoComplete="off"
             minLength={1}
             onChange={handleChange}
-            value={newIngredient.ingredient}
+            value={newIngredient.name}
             className="border border-gray-300 rounded-md p-2 text-sm focus:ring-blue-500 focus:border-blue-500"
           />
-          <label htmlFor="price" className="text-sm font-medium text-gray-700">
+          <label htmlFor="pricePerKg" className="text-sm font-medium text-gray-700">
             Price
           </label>
           <input
             type="number"
-            id="price"
-            name="price"
+            id="pricePerKg"
+            name="pricePerKg"
             min={0}
             onChange={handleChange}
-            value={newIngredient.price}
+            value={newIngredient.pricePerKg}
             className="border border-gray-300 rounded-md p-2 text-sm focus:ring-blue-500 focus:border-blue-500"
           />
           {/* <label htmlFor="price" className="text-sm font-medium text-gray-700">

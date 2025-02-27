@@ -1,37 +1,52 @@
 import React, { useContext, useEffect, useState } from "react";
 import OrderContext from "./OrderContext";
-import { ingredientMap } from "../data";
 import cartContext from "./CartContext";
+import allProductContext from "./AllProductsContext";
 const OrderState = (props) => {
   const cartCtx = useContext(cartContext);
-  const { addFodderToCart } = cartCtx;
-  const [orderMap, setOrderMap] = useState(ingredientMap);
+  const allProductsCtx = useContext(allProductContext);
+  const {fodderMap} = allProductsCtx;
+  const { addFodderToCart, clearOrders } = cartCtx;
+  const [orderMap, setOrderMap] = useState(fodderMap);
   const [editFodderId, setEditFodderId] = useState("");
   const [totalObject, setTotalObject] = useState({ sum: 0, weight: 0 });
-
+  useEffect(()=>{setOrderMap(fodderMap)},[fodderMap])
   useEffect(()=>{updateTotalObject(orderMap)},[orderMap])
+  useEffect(() => {
+    resetFodder();
+  }, [clearOrders]);
   const updateTotalObject = (newMap) => {
     let sum = 0;
     let weight = 0;
-    for (const [, value] of newMap) {
-      sum += value.totalPrice;
-      weight += value.quantity;
+    if(newMap){
+      for (const [,value] of Object.entries(newMap)) {
+        sum += value.totalPrice;
+        if(value.isWhole){
+          let wt = value.weightOfBag*value.quantityInCount;
+          weight += wt;
+        }
+        else{
+          weight += value.quantityInWeight;
+        }
+      }
+      weight = parseFloat(weight.toFixed(2));
+      setTotalObject({ sum: sum, weight: weight });
     }
-    weight = parseFloat(weight.toFixed(2));
-    setTotalObject({ sum: sum, weight: weight });
+    
   };
   const updateOrder = (id, ingredientObject) => {
     setOrderMap((prevMap) => {
-      // Create a new Map instance and copy the previous entries
-      let newMap = new Map(prevMap);
-      newMap.set(id, ingredientObject); // Update the new Map
+      let newMap = {...prevMap};
+      newMap[id] = ingredientObject; // Update the new Map
+      console.log("Update Order", newMap)
       return newMap; // Return the new Map
     });
   };
 
   const resetFodder = () => {
+    console.log("Reset Fodder")
     setOrderMap((prevMap) => {
-      let newMap = new Map(ingredientMap);
+      let newMap = fodderMap;
       return newMap;
     });
     setTotalObject({ sum: 0, weight: 0 });
@@ -59,6 +74,9 @@ const OrderState = (props) => {
     }
     resetFodder();
   };
+
+
+
   return (
     <OrderContext.Provider
       value={{
@@ -66,6 +84,7 @@ const OrderState = (props) => {
         updateOrder,
         totalObject,
         resetFodder,
+        editFodderId,
         addToCart,
         setOrderMap,
         setEditFodderId,

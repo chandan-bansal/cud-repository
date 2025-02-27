@@ -69,9 +69,9 @@ const Navbar = () => {
               <p className="text-gray-500 text-sm">{loggedInCustomer?.village?loggedInCustomer.village:""}</p>
             </div>
             {showUserDialog && (
-              <div className="absolute bg-white border border-gray-300 shadow-lg rounded-lg p-4 mt-2 z-50" style={{ top: "100%" }}>
+              <div className="absolute min-w-20 bg-white border border-gray-300 shadow-lg rounded-lg p-4 mt-2 z-50" style={{ top: "100%" }}>
                 <button
-                  className="min-w-11 px-4 py-2 text-gray-700 hover:text-white hover:bg-blue-500 rounded-lg text-left" 
+                  className="min-w-20 px-4 py-2 text-gray-700 hover:text-white hover:bg-blue-500 rounded-lg text-left" 
                   onClick={handleNewCustomerClick}
                 >
                   Order For New Customer

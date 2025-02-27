@@ -31,16 +31,11 @@ const FodderCartItem = (props) => {
       <p className="text-center text-gray-600">{orderDetails.totalWeight} kg</p>
       <p className="text-center text-gray-600">⟨₹⟩{orderDetails.totalSum}</p>
       <div className="flex justify-center space-x-4">
-        {/* <button className="text-blue-500 hover:text-blue-700" onClick={editFodder}>
-          <i className="material-icons" style={{ fontSize: 24 }}>
-            edit
-          </i>
-        </button> */}
-        <button className="text-red-500 hover:text-red-700" onClick={deleteFodder}>
+        {!pathName.includes("orders") && <button className="text-red-500 hover:text-red-700" onClick={deleteFodder}>
           <i className="material-icons" style={{ fontSize: 24 }}>
             delete
           </i>
-        </button>
+        </button>}
       </div>
     </div>
   );

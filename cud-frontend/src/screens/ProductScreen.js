@@ -4,6 +4,7 @@ import productContext from "../context/ProductContext";
 const ProductScreen = () => {
   const productCtx = useContext(productContext);
   const {productList} = productCtx
+  
   return (
     <div className="p-2">
       {Object.entries(productList).map(([key, value]) => {
