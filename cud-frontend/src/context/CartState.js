@@ -4,6 +4,10 @@ import customerContext from "./CustomerContext";
 import { useNavigate } from "react-router-dom";
 const host = "http://localhost:5000";
 const CartState = (props) => {
+<<<<<<< HEAD
+=======
+  const host = "https://cud-repository-backend.onrender.com"
+>>>>>>> origin/main
   const customerCtx = useContext(customerContext);
   const { loggedInCustomer } = customerCtx;
   const [clearOrders, setClearOrders] = useState(true);

@@ -3,6 +3,10 @@ import CustomerContext from "./CustomerContext";
 const host = "http://localhost:5000"
 
 const CustomerState = (props) => {
+<<<<<<< HEAD
+=======
+  const host = "https://cud-repository-backend.onrender.com"
+>>>>>>> origin/main
   const [allCustomers, setAllCustomers] = useState([]);
   const [loggedInCustomer, setLoggedInCustomer] = useState(() => {
     try {
