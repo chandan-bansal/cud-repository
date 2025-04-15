@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ProductContext from './ProductContext'
-const host = "http://localhost:5000";
+const host = "https://weather-app-backend-t3uy.onrender.com";
 const ProductState = (props) => {
     const [productsArr, setProductsArr] = useState(() =>{
         const savedData = localStorage.getItem("productsAdmin");

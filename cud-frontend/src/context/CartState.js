@@ -2,12 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import CartContext from "./CartContext";
 import customerContext from "./CustomerContext";
 import { useNavigate } from "react-router-dom";
-const host = "http://localhost:5000";
+const host = "https://weather-app-backend-t3uy.onrender.com";
 const CartState = (props) => {
-<<<<<<< HEAD
-=======
-  const host = "https://cud-repository-backend.onrender.com"
->>>>>>> origin/main
   const customerCtx = useContext(customerContext);
   const { loggedInCustomer } = customerCtx;
   const [clearOrders, setClearOrders] = useState(true);

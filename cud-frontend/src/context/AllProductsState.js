@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AllProductContext from "./AllProductsContext";
-const host = "http://localhost:5000";
+const host = "https://weather-app-backend-t3uy.onrender.com";
 const AllProductsState = (props) => {
   const [productObject, setProductObject] = useState(() => {
     const savedData = localStorage.getItem("fetchedProducts");
