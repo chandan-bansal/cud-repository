@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import CartContext from "./CartContext";
 import customerContext from "./CustomerContext";
 import { useNavigate } from "react-router-dom";
-const host = "https://weather-app-backend-t3uy.onrender.com";
+const host = "https://cud-repository-backend.onrender.com";
 const CartState = (props) => {
   const customerCtx = useContext(customerContext);
   const { loggedInCustomer } = customerCtx;
